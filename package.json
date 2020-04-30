@@ -1,0 +1,18 @@
+{
+  "name": "ama-overlay",
+  "version": "1.0.0",
+  "description": "Overlay for Hack Club's AMAs.",
+  "main": "app.js",
+  "repository": "git@github.com:hackclub/ama-overlay.git",
+  "author": "Mingjie Jiang <jiang@mingjie.dev>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0",
+    "socket.io": "^2.3.0"
+  },
+  "scripts": {
+    "start": "node app.js"
+  }
+}

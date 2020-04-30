@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<head>
+    <title>AMA Overlay Admin</title>
+    <link rel="stylesheet" href="https://unpkg.com/blocks.css/dist/blocks.min.css" />
+    <style>
+        @import url('https://rsms.me/inter/inter.css');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            max-width: 800px;
+            margin: auto
+        }
+
+        input {
+            width: 100%;
+        }
+
+        input:disabled {
+            background-color: lightgray;
+        }
+
+        #profile-preview {
+            margin: auto;
+        }
+
+        #push:before {
+            background-color: #e42d42;
+        }
+
+        #push {
+            color: white;
+        }
+
+        @supports (font-variation-settings: normal) {
+            html {
+                font-family: 'Inter var', sans-serif;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="block fixed">
+
+        <h1>AMA Overlay Admin</h1>
+
+        <input type="email" class="block" id="email" placeholder="Email">
+        <button href="#" class="block accent" id="update">Update</button>
+
+        <hr />
+
+        <img class="block" id="profile-preview" src="https://via.placeholder.com/192">
+        
+        <form action="/push" method="POST">
+            <input type="text" class="block" name="profile" id="profile" placeholder="Profile Picture URL">
+            <input type="text" class="block" name="admin" id="admin" placeholder="Is Admin">
+            <input type="text" class="block" name="name" id="name" placeholder="Full Name">
+            <input type="text" class="block" name="handle" id="handle" placeholder="Slack Handle">
+
+            <button href="#" type="submit" class="block red" id="push">Push!</button>
+        </form>
+
+        <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+            integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+
+        <script src="admin.js"></script>
+    </div>
+</body>
+
+</html>
