@@ -27,16 +27,14 @@
         }
 
         #overlay {
-            width: 300px;
+            min-width: 300px;
+            width: auto;
             background: radial-gradient(farthest-corner at 0px 0px, #ff8c37 0%, #ec3750 80%);
             border-radius: 12px;
             padding: 15px 25px;
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.0625), 0 8px 12px rgba(0, 0, 0, 0.125);
             height: 65px;
-            display: grid;
-            /* grid-template-columns: 1fr 3fr; */
-            grid-template-columns: 1fr;
-            grid-gap: 5px;
+            display: inline-block;
         }
 
         #profile {
@@ -52,7 +50,7 @@
 
         p#name {
             font-size: 1.8rem;
-            margin-top: 7px;
+            margin-top: 6px;
             font-weight: bold;
         }
 
@@ -71,10 +69,8 @@
             <img src="https://via.placeholder.com/192" id="profile">
         </div> -->
 
-        <div id="right">
-            <p id="name"></p>
-            <p id="info"><span id="handle"></span> · <span id="role">Hack Club Staff</span></p>
-        </div>
+        <p id="name"></p>
+        <p id="info"><span id="handle"></span> · <span id="role">Hack Club Staff</span></p>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"
