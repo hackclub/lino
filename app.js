@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const fetch = require("node-fetch");
 const bodyParser = require("body-parser");
+const basicAuth = require("express-basic-auth");
 
 const app = express();
 const http = require("http").createServer(app);
@@ -13,8 +14,18 @@ const port = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get(
+  "/admin/*",
+  basicAuth({
+    users: { admin: process.env.ADMIN_PASSWORD },
+    challenge: true,
+    realm: "admin-zone",
+  }),
+  express.static(path.join(__dirname, "/public/admin"))
+);
+
 // front-end
-app.get("/*", express.static(path.join(__dirname, "public")));
+app.get("/*", express.static(path.join(__dirname, "/public")));
 
 app.get("/lookup/:email", (req, res) => {
   fetch(`https://slack.com/api/users.lookupByEmail?email=${req.params.email}`, {
