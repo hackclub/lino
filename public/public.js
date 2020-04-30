@@ -15,7 +15,7 @@ const render = (data) => {
       $("#name").text(data.name);
       $("#handle").text(data.handle);
       $("#admin").css("display", data.admin ? "inline" : "none");
-      $("#profile").attr("src", data.profile);
+      $("#profile").attr("src", data.profile || "/logo.svg");
       $("body").fadeIn();
     }, 1000);
   }
