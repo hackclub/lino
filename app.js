@@ -92,8 +92,7 @@ app.get("/push/airtable", (req, res) => {
     };
 
     io.emit("push", currentData);
-
-    res.status(200).end();
+    res.status(200).send(`We done. Close this!`);
   } else {
     res.status(400).end();
   }
