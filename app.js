@@ -66,7 +66,7 @@ app.post("/push", (req, res) => {
   currentData = {
     name: req.body.name,
     handle: req.body.handle,
-    admin: req.body.admin == "admin",
+    role: req.body.admin == "admin",
     profile: req.body.profile,
   };
 
@@ -81,6 +81,22 @@ app.get("/clear", (req, res) => {
   io.emit("clear");
 
   res.status(200).end();
+});
+
+app.get("/push/airtable", (req, res) => {
+  if (req.query.auth == process.env.ADMIN_PASSWORD) {
+    currentData = {
+      name: req.query.name,
+      handle: req.query.handle,
+      role: req.query.role,
+    };
+
+    io.emit("push", currentData);
+
+    res.status(200).end();
+  } else {
+    res.status(400).end();
+  }
 });
 
 io.on("connection", (socket) => {
