@@ -42,6 +42,11 @@
             display: inline-block;
             width: 100%;
         }
+
+        iframe {
+            border: 0;
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -56,7 +61,7 @@
         <hr />
 
         <img class="block" id="profile-preview" src="https://via.placeholder.com/192">
-        
+
         <form action="/push" method="POST">
             <input type="text" class="block" name="profile" id="profile" placeholder="Profile Picture URL">
             <input type="text" class="block" name="admin" id="admin" placeholder="Is Admin">
@@ -67,12 +72,19 @@
         </form>
 
         <button href="#" class="block accent" id="clear">Clear!</button>
-        
-        <script src="https://code.jquery.com/jquery-3.5.0.min.js"
-            integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 
-        <script src="admin.js"></script>
     </div>
+
+    <hr />
+    <div class="block">
+        <h1>Live Preview</h1>
+        <iframe src="/"></iframe>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+
+    <script src="admin.js"></script>
 </body>
 
 </html>
