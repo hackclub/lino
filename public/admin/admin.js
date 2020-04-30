@@ -7,6 +7,8 @@ $("#update").on("click", () => {
       $("#admin").val(data.admin ? "admin" : "");
       $("#profile").val(data.profile);
       $("#profile-preview").attr("src", data.profile);
+
+      $("#handle").focus();
     });
 });
 
