@@ -17,6 +17,10 @@ $("#email").keypress(function (event) {
   }
 });
 
+$("#clear").on("click", () => {
+  fetch("/clear");
+})
+
 String.prototype.titleCase = function() {
   let str = this.toLowerCase().split(" ");
   for (let i = 0; i < str.length; i++) {

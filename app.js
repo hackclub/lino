@@ -75,6 +75,14 @@ app.post("/push", (req, res) => {
   res.status(200).redirect("/admin");
 });
 
+// clear current overlay
+app.get("/clear", (req, res) => {
+  currentData = {};
+  io.emit("clear");
+
+  res.status(200).end();
+});
+
 io.on("connection", (socket) => {
   console.log("a user connected");
   console.log(currentData);

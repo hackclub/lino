@@ -2,12 +2,77 @@
 
 <head>
     <title>AMA Overlay</title>
+
+    <style>
+        @font-face {
+            font-family: 'Phantom Sans';
+            src: url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Regular.woff') format('woff'),
+                url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Phantom Sans';
+            src: url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Bold.woff') format('woff'),
+                url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Bold.woff2') format('woff2');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body {
+            display: none;
+        }
+
+        #overlay {
+            width: 300px;
+            background-color: #e42d42;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.0625), 0 8px 12px rgba(0, 0, 0, 0.125);
+            height: 65px;
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            grid-gap: 10px;
+        }
+
+        #profile {
+            height: 65px;
+            border-radius: 100px;
+        }
+
+        p {
+            color: white;
+            font-family: 'Phantom Sans 0.7';
+            margin: 0;
+        }
+
+        p#name {
+            font-size: 2rem;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        p#info {
+            margin-top: 3px;
+        }
+    </style>
 </head>
 
 <body>
 
     <div id="overlay">
         <!-- Put Design Here -->
+        <div id="left">
+            <img src="https://via.placeholder.com/192" id="profile">
+        </div>
+
+        <div id="right">
+            <p id="name"></p>
+            <p id="info"><span id="handle"></span><span id="admin"> · Hack Club Staff</span></p>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"
