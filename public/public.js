@@ -11,12 +11,14 @@ const render = (data) => {
   console.log(data)
 
   if (!$.isEmptyObject(data)) {
-    setTimeout(() => {
       $("#name").text(data.name);
       $("#handle").text(data.handle);
       $("#role").text(data.role);
       //$("#profile").attr("src", data.profile || "/logo.svg");
       $("body").fadeIn();
-    }, 1000);
+
+      setTimeout(() => {
+        $("body").fadeOut();
+      }, 10000)
   }
 };
