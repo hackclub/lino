@@ -54,7 +54,7 @@ app.post("/push", (req, res) => {
 
 	io.emit("push", currentData);
 
-	res.status(200).redirect("/admin");
+	res.status(200);
 });
 
 // clear current overlay

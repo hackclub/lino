@@ -8,6 +8,7 @@ $("#lookup").keypress(function (event) {
 
 $("#clear").on("click", () => {
   fetch("/clear");
+  togglePushButton(true);
 });
 
 String.prototype.titleCase = function () {
@@ -18,8 +19,41 @@ String.prototype.titleCase = function () {
   return str.join(" ");
 };
 
+let PUSHLOCK = false;
+
 window.addEventListener("load", function () {
-  $("#lookup").val("")
+  $("#lookup").val("");
+
+  $("#pushdata").submit(function () {
+    if (!PUSHLOCK) {
+      var formdata = $(this).serialize();
+
+      // failsafe
+      PUSHLOCK = true;
+      $.ajax({
+        type: "POST",
+        url: "/push",
+        data: formdata,
+      });
+
+      let cd = 10;
+
+      $("#push").text(`Hiding in 10...`);
+      togglePushButton(false);
+      let timer = setInterval(() => {
+        cd--;
+        $("#push").text(`Hiding in ${cd}...`);
+
+        if (cd <= 0) {
+          clearInterval(timer);
+          PUSHLOCK = false;
+          togglePushButton(true);
+        }
+      }, 1000);
+
+      return false;
+    }
+  });
 
   // Add a keyup event listener to our input element
   var name_input = document.getElementById("lookup");
@@ -83,4 +117,17 @@ let fill = (name, role, handle) => {
   $("#role").val(role);
   $("#handle").val(handle);
   $("#prefill").html("Start typing. Suggestions will appear here.");
+};
+
+let togglePushButton = (enable) => {
+  if (enable) {
+    $("#push").text(`Push!`);
+    $("#push").addClass("red");
+    $("#push").attr("disabled", false);
+    $("#push").css("cursor", "pointer");
+  } else {
+    $("#push").removeClass("red");
+    $("#push").attr("disabled", true);
+    $("#push").css("cursor", "not-allowed");
+  }
 };

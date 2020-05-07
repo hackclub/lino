@@ -34,11 +34,11 @@
             margin: auto;
         }
 
-        #push:before {
+        .block.red:before {
             background-color: #e42d42;
         }
 
-        #push {
+        .block.red {
             color: white;
         }
 
@@ -101,7 +101,7 @@
 
         <hr />
 
-        <form action="/push" method="POST">
+        <form id="pushdata" method="POST">
             <input type="text" class="block fixed" name="name" id="name" placeholder="Full Name">
             <input type="text" class="block fixed" name="handle" id="handle" placeholder="Slack Handle">
             <input type="text" class="block fixed" name="role" id="role" placeholder="Role">
