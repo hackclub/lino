@@ -14,6 +14,7 @@
 
         input {
             width: 100%;
+            font-size: 1rem;
         }
 
         input:disabled {
@@ -30,6 +31,20 @@
 
         #push {
             color: white;
+        }
+
+        .suggestion {
+            font-weight: 400;
+            color: black;
+            text-decoration: underline;
+            margin-right: 2rem;
+            display: block;
+            cursor: pointer;
+        }
+
+        #prefill .suggestion:nth-child(1) {
+            color: red;
+            font-weight: 600;
         }
 
         @supports (font-variation-settings: normal) {
@@ -55,18 +70,17 @@
 
         <h1>AMA Overlay Admin</h1>
 
-        <input type="email" class="block" id="email" placeholder="Email">
-        <button href="#" class="block accent" id="update">Update</button>
+        <input class="block fixed" type="text" id="lookup" placeholder="Lookup by Name" list="prefill" autofocus>
+        <div id="prefill" class="block fixed">
+            Start typing. Suggestions will appear here.
+        </div>
 
         <hr />
 
-        <img class="block" id="profile-preview" src="https://via.placeholder.com/192">
-
         <form action="/push" method="POST">
-            <input type="text" class="block" name="profile" id="profile" placeholder="Profile Picture URL">
-            <input type="text" class="block" name="admin" id="admin" placeholder="Is Admin">
-            <input type="text" class="block" name="name" id="name" placeholder="Full Name">
-            <input type="text" class="block" name="handle" id="handle" placeholder="Slack Handle">
+            <input type="text" class="block fixed" name="role" id="role" placeholder="Role">
+            <input type="text" class="block fixed" name="name" id="name" placeholder="Full Name">
+            <input type="text" class="block fixed" name="handle" id="handle" placeholder="Slack Handle">
 
             <button href="#" type="submit" class="block red" id="push">Push!</button>
         </form>

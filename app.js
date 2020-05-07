@@ -15,99 +15,81 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get(
-  "/admin/*",
-  basicAuth({
-    users: { admin: process.env.ADMIN_PASSWORD },
-    challenge: true,
-    realm: "admin-zone",
-  }),
-  express.static(path.join(__dirname, "/public/admin"))
+	"/admin/*",
+	basicAuth({
+		users: { admin: process.env.ADMIN_PASSWORD },
+		challenge: true,
+		realm: "admin-zone",
+	}),
+	express.static(path.join(__dirname, "/public/admin"))
 );
 
 // front-end
 app.get("/*", express.static(path.join(__dirname, "/public")));
 
-app.get("/lookup/:email", (req, res) => {
-  fetch(`https://slack.com/api/users.lookupByEmail?email=${req.params.email}`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${process.env.SLACK_TOKEN}`,
-      "Content-Type": "application/x-www-form-urlencoded",
+app.get("/lookup/:query", (req, res) => {
+
+  const url = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE}/Students?filterByFormula=SEARCH(LOWER("${req.params.query}"), LOWER(Name))>=1&view=Stream+View&fields%5B%5D=Name&fields%5B%5D=Slack+Handle&fields%5B%5D=Role`;
+
+	fetch(url, {
+		method: "GET",
+		headers: {
+      Authorization: `Bearer ${process.env.AIRTABLE_KEY}`
     },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Success: ", data);
-
-      if (data.ok) {
-        let resData = {
-          ok: data.ok,
-          name: data.user.real_name,
-          handle: data.user.name,
-          profile: data.user.profile.image_192,
-          admin: data.user.is_admin,
-        };
-
-        res.status(200).send(resData);
-      } else {
-        res.status(404).send(data);
-      }
-    })
-    .catch((err) => {
-      console.log("Error: ", err);
-      res.status(500).send(err);
-    });
+		//credentials: 'user:passwd'
+	})
+		.then((response) => response.json())
+		.then((json) => res.send(json));
 });
 
 let currentData = {};
 
 // push card update to user socket
 app.post("/push", (req, res) => {
-  currentData = {
-    name: req.body.name,
-    handle: req.body.handle,
-    role: req.body.admin == "admin",
-    profile: req.body.profile,
-  };
+	currentData = {
+		name: req.body.name,
+		handle: req.body.handle,
+		role: req.body.role
+	};
 
-  io.emit("push", currentData);
+	io.emit("push", currentData);
 
-  res.status(200).redirect("/admin");
+	res.status(200).redirect("/admin");
 });
 
 // clear current overlay
 app.get("/clear", (req, res) => {
-  currentData = {};
-  io.emit("clear");
+	currentData = {};
+	io.emit("clear");
 
-  res.status(200).end();
+	res.status(200).end();
 });
 
-app.get("/push/airtable", (req, res) => {
-  if (req.query.auth == process.env.ADMIN_PASSWORD) {
-    currentData = {
-      name: req.query.name,
-      handle: req.query.handle,
-      role: req.query.role,
-    };
+// app.get("/push/airtable", (req, res) => {
+// 	if (req.query.auth == process.env.ADMIN_PASSWORD) {
+// 		currentData = {
+// 			name: req.query.name,
+// 			handle: req.query.handle,
+// 			role: req.query.role,
+// 		};
 
-    io.emit("push", currentData);
-    res.status(200).send(`We done. Close this!`);
-  } else {
-    res.status(400).end();
-  }
-});
+// 		io.emit("push", currentData);
+// 		res.status(200).send(`We done. Close this!`);
+// 	} else {
+// 		res.status(400).end();
+// 	}
+// });
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
-  console.log(currentData);
-  io.emit("push", currentData);
+	console.log("a user connected");
+	console.log(currentData);
+	io.emit("push", currentData);
 
-  socket.on("disconnect", () => {
-    console.log("user disconnected");
-  });
+	socket.on("disconnect", () => {
+		console.log("user disconnected");
+	});
 });
 
 http.listen(port, () => {
-  console.log(`listening on *:${port}`);
+	console.log(`listening on *:${port}`);
 });
