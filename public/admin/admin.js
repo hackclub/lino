@@ -19,12 +19,12 @@ let PUSHLOCK = false, timer;
 window.addEventListener("load", function () {
   $("#lookup").val("");
 
-  $("#pushdata").submit(function () {
+  $("#pushdata").submit(function (event) {
+    event.preventDefault();
     if (!PUSHLOCK) {
       var formdata = $(this).serialize();
 
       // failsafe
-      PUSHLOCK = true;
       $.ajax({
         type: "POST",
         url: "/push",
@@ -41,7 +41,6 @@ window.addEventListener("load", function () {
 
         if (cd <= 0) {
           clearInterval(timer);
-          PUSHLOCK = false;
           togglePushButton(true);
         }
       }, 1000);
@@ -120,10 +119,12 @@ let togglePushButton = (enable) => {
     $("#push").addClass("red");
     $("#push").attr("disabled", false);
     $("#push").css("cursor", "pointer");
+    PUSHLOCK = false;
   } else {
     $("#push").removeClass("red");
     $("#push").attr("disabled", true);
     $("#push").css("cursor", "not-allowed");
+    PUSHLOCK = true;
   }
 };
 

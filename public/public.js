@@ -7,7 +7,7 @@ $(function () {
 
 // all the js animcations, data display, go here
 const render = (data) => {
-  $("body").fadeOut();
+  $("body").hide("slide", {direction: "down"});
   console.log(data)
 
   if (!$.isEmptyObject(data)) {
@@ -15,10 +15,11 @@ const render = (data) => {
       $("#handle").text(data.handle);
       $("#role").text(data.role);
       //$("#profile").attr("src", data.profile || "/logo.svg");
-      $("body").fadeIn();
+      $("body").show("slide", {direction: "down"}, 500).hide();
+      $("body").fadeIn(500).dequeue(); 
 
       setTimeout(() => {
-        $("body").fadeOut();
+        $("body").hide("slide", {direction: "down"});
       }, 10000)
   }
 };
