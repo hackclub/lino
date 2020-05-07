@@ -82,8 +82,6 @@ app.get("/clear", (req, res) => {
 
 io.on("connection", (socket) => {
 	console.log("a user connected");
-	console.log(currentData);
-	io.emit("push", currentData);
 
 	socket.on("disconnect", () => {
 		console.log("user disconnected");
