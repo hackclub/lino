@@ -15,54 +15,61 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get(
-	"/admin/*",
-	basicAuth({
-		users: { admin: process.env.ADMIN_PASSWORD },
-		challenge: true,
-		realm: "admin-zone",
-	}),
-	express.static(path.join(__dirname, "/public/admin"))
+  "/admin/*",
+  basicAuth({
+    users: { admin: process.env.ADMIN_PASSWORD },
+    challenge: true,
+    realm: "admin-zone",
+  }),
+  express.static(path.join(__dirname, "/public/admin"))
 );
 
 // front-end
 app.get("/*", express.static(path.join(__dirname, "/public")));
 
-app.get("/lookup/:query", (req, res) => {
+app.get(
+  "/lookup/:query",
+  basicAuth({
+    users: { admin: process.env.ADMIN_PASSWORD },
+    challenge: true,
+    realm: "admin-zone",
+  }),
+  (req, res) => {
+    const url = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE}/Students?filterByFormula=SEARCH(LOWER("${req.params.query}"), LOWER(Name))>=1&view=Stream+View&fields%5B%5D=Name&fields%5B%5D=Slack+Handle&fields%5B%5D=Role`;
 
-  const url = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE}/Students?filterByFormula=SEARCH(LOWER("${req.params.query}"), LOWER(Name))>=1&view=Stream+View&fields%5B%5D=Name&fields%5B%5D=Slack+Handle&fields%5B%5D=Role`;
-
-	fetch(url, {
-		method: "GET",
-		headers: {
-      Authorization: `Bearer ${process.env.AIRTABLE_KEY}`
-    },
-		//credentials: 'user:passwd'
-	})
-		.then((response) => response.json())
-		.then((json) => res.send(json));
-});
+    fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${process.env.AIRTABLE_KEY}`,
+      },
+      //credentials: 'user:passwd'
+    })
+      .then((response) => response.json())
+      .then((json) => res.send(json));
+  }
+);
 
 let currentData = {};
 
 // push card update to user socket
 app.post("/push", (req, res) => {
-	currentData = {
-		name: req.body.name,
-		handle: req.body.handle,
-		role: req.body.role
-	};
+  currentData = {
+    name: req.body.name,
+    handle: req.body.handle,
+    role: req.body.role,
+  };
 
-	io.emit("push", currentData);
+  io.emit("push", currentData);
 
-	res.status(200);
+  res.status(200);
 });
 
 // clear current overlay
 app.get("/clear", (req, res) => {
-	currentData = {};
-	io.emit("clear");
+  currentData = {};
+  io.emit("clear");
 
-	res.status(200).end();
+  res.status(200).end();
 });
 
 // app.get("/push/airtable", (req, res) => {
@@ -81,13 +88,13 @@ app.get("/clear", (req, res) => {
 // });
 
 io.on("connection", (socket) => {
-	console.log("a user connected");
+  console.log("a user connected");
 
-	socket.on("disconnect", () => {
-		console.log("user disconnected");
-	});
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  });
 });
 
 http.listen(port, () => {
-	console.log(`listening on *:${port}`);
+  console.log(`listening on *:${port}`);
 });
