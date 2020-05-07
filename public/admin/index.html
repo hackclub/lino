@@ -12,6 +12,15 @@
             margin: auto
         }
 
+        p {
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        #instructions {
+            margin: 10px 5px 2rem;
+        }
+
         input {
             width: 100%;
             font-size: 1rem;
@@ -69,6 +78,21 @@
     <div class="block fixed">
 
         <h1>AMA Overlay Admin</h1>
+        <div id="instructions">
+            <p>Quick instructions: start your search by typing in the name of the speaker, and a list of suggestions
+                will be
+                provided once you type in more than 3 characters.</p>
+            <p>When you hit "Enter", the suggestion highlighted in red
+                will be filled into the form (you can also directly click another option). Your cursor will be moved to
+                the
+                end of the table. Double check for any errors. If
+                everything looks straight, hit "Enter" again to push the card out.
+            </p>
+            <p>
+                The card should automatically disappear within 10 secs. Something's stuck on the screen? Hit the "FORCE Clear" button 
+                to wipe the socket.
+            </p>
+        </div>
 
         <input class="block fixed" type="text" id="lookup" placeholder="Lookup by Name" list="prefill" autofocus>
         <div id="prefill" class="block fixed">
@@ -78,22 +102,24 @@
         <hr />
 
         <form action="/push" method="POST">
-            <input type="text" class="block fixed" name="role" id="role" placeholder="Role">
             <input type="text" class="block fixed" name="name" id="name" placeholder="Full Name">
             <input type="text" class="block fixed" name="handle" id="handle" placeholder="Slack Handle">
+            <input type="text" class="block fixed" name="role" id="role" placeholder="Role">
 
             <button href="#" type="submit" class="block red" id="push">Push!</button>
         </form>
 
-        <button href="#" class="block accent" id="clear">Clear!</button>
+        <button href="#" class="block accent" id="clear">FORCE Clear!</button>
 
     </div>
 
     <hr />
-    <div class="block">
-        <h1>Live Preview</h1>
+    <div class="block fixed">
+        <h1>Live Right Now</h1>
         <iframe src="/"></iframe>
     </div>
+
+    <p style="text-align: right;">by @itsmingjie</p>
 
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"
         integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
