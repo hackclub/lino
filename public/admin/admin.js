@@ -6,11 +6,6 @@ $("#lookup").keypress(function (event) {
   }
 });
 
-$("#clear").on("click", () => {
-  fetch("/clear");
-  togglePushButton(true);
-});
-
 String.prototype.titleCase = function () {
   let str = this.toLowerCase().split(" ");
   for (let i = 0; i < str.length; i++) {
@@ -19,7 +14,7 @@ String.prototype.titleCase = function () {
   return str.join(" ");
 };
 
-let PUSHLOCK = false;
+let PUSHLOCK = false, timer;
 
 window.addEventListener("load", function () {
   $("#lookup").val("");
@@ -40,7 +35,7 @@ window.addEventListener("load", function () {
 
       $("#push").text(`Hiding in 10...`);
       togglePushButton(false);
-      let timer = setInterval(() => {
+      timer = setInterval(() => {
         cd--;
         $("#push").text(`Hiding in ${cd}...`);
 
@@ -131,3 +126,9 @@ let togglePushButton = (enable) => {
     $("#push").css("cursor", "not-allowed");
   }
 };
+
+$("#clear").on("click", () => {
+  fetch("/clear");
+  togglePushButton(true);
+  clearInterval(timer);
+});
