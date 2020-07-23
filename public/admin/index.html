@@ -75,7 +75,7 @@
 </head>
 
 <body>
-    <div class="block fixed">
+    <div >
 
         <h1>Lino Admin</h1>
         <div id="instructions">
@@ -94,17 +94,17 @@
             </p>
         </div>
 
-        <input class="block fixed" type="text" id="lookup" placeholder="Lookup by Name" list="prefill" autofocus>
-        <div id="prefill" class="block fixed">
+        <input  type="text" id="lookup" placeholder="Lookup by Name" list="prefill" autofocus>
+        <div id="prefill" >
             Start typing. Suggestions will appear here.
         </div>
 
         <hr />
 
         <form id="pushdata" method="POST">
-            <input type="text" class="block fixed" name="name" id="name" placeholder="Full Name">
-            <input type="text" class="block fixed" name="handle" id="handle" placeholder="Slack Handle">
-            <input type="text" class="block fixed" name="role" id="role" placeholder="Role">
+            <input type="text" name="name" id="name" placeholder="Full Name">
+            <input type="text" name="handle" id="handle" placeholder="Slack Handle">
+            <input type="text" name="role" id="role" placeholder="Role">
 
             <button href="#" type="submit" class="block red" id="push">Push!</button>
         </form>
@@ -114,7 +114,7 @@
     </div>
 
     <hr />
-    <div class="block fixed">
+    <div >
         <h1>Live Right Now</h1>
         <iframe src="/"></iframe>
     </div>

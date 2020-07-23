@@ -4,100 +4,62 @@
     <title>Lino - AMA Overlay</title>
 
     <style>
-    @font-face {
-      font-family: 'Phantom Sans';
-      src:
-        url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Regular.woff') format('woff'),
-        url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Regular.woff2') format('woff2');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
-    }
+  @font-face {
+    font-family: 'Phantom Sans';
+    src:
+      url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Regular.woff') format('woff'),
+      url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
 
-    @font-face {
-      font-family: 'Phantom Sans';
-      src:
-        url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Bold.woff') format('woff'),
-        url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Bold.woff2') format('woff2');
-      font-weight: bold;
-      font-style: normal;
-      font-display: swap;
-    }
+  @font-face {
+    font-family: 'Phantom Sans';
+    src:
+      url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Bold.woff') format('woff'),
+      url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
 
-    body {
-      display: none;
-    }
+  body {
+    display: none;
+  }
 
-    #overlay {
-      min-width: 300px;
-      width: auto;
-      padding: 15px 30px;
-      height: 80px;
-      border: 3px solid rgb(242, 78, 30);
-      background-color: #fff;
-      display: inline-block;
-      position: relative;
-    }
+  #overlay {
+    min-width: 300px;
+    width: auto;
+    background: radial-gradient(farthest-corner at 0 0, #ff8c37 0%, #ec3750 80%);
+    border-radius: 12px;
+    padding: 15px 30px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.0625), 0 8px 12px rgba(0, 0, 0, 0.125);
+    height: 80px;
+    display: inline-block;
+  }
 
-    p#decor {
-      position: absolute;
-      bottom: -20px;
-      left: 0;
-      font-size: 13px;
-      color: rgb(242, 78, 30);
-      text-align: center;
-      width: 100%;
-    }
+  #profile {
+    height: 65px;
+    border-radius: 100px;
+  }
 
-    #profile {
-      height: 65px;
-      border-radius: 100px;
-    }
+  p {
+    color: white;
+    font-family: 'Phantom Sans 0.7';
+    margin: 0;
+  }
 
-    p {
-      color: #000;
-      font-family: 'Phantom Sans 0.7';
-      margin: 0;
-    }
+  p#name {
+    font-size: 2.2rem;
+    margin-top: 6px;
+    font-weight: bold;
+  }
 
-    p#name {
-      font-size: 2.2rem;
-      margin-top: 6px;
-      font-weight: bold;
-    }
-
-    p#info {
-      margin-top: 3px;
-      font-size: 1.4rem;
-    }
-
-    .vertex {
-      height: 5px;
-      width: 5px;
-      background: #fff;
-      position: absolute;
-      border: 3px solid rgb(242, 78, 30);
-    }
-
-    .lefttop {
-      top: -5px;
-      left: -5px;
-    }
-
-    .leftbottom {
-      bottom: -5px;
-      left: -5px;
-    }
-
-    .righttop {
-      right: -5px;
-      top: -5px;
-    }
-
-    .rightbottom {
-      right: -5px;
-      bottom: -5px;
-    }
+  p#info {
+    margin-top: 3px;
+    font-size: 1.4rem;
+  }
     </style>
 </head>
 
