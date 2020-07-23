@@ -4,6 +4,7 @@
     <title>Lino - AMA Overlay</title>
 
     <style>
+<<<<<<< HEAD
     @font-face {
       font-family: 'Phantom Sans';
       src:
@@ -98,26 +99,75 @@
       right: -5px;
       bottom: -5px;
     }
+=======
+        @font-face {
+            font-family: 'Phantom Sans';
+            src: url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Regular.woff') format('woff'),
+                url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Phantom Sans';
+            src: url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Bold.woff') format('woff'),
+                url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Bold.woff2') format('woff2');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body {
+            display: none;
+        }
+
+        #overlay {
+            min-width: 300px;
+            width: auto;
+            background: radial-gradient(farthest-corner at 0px 0px, #ff8c37 0%, #ec3750 80%);
+            border-radius: 12px;
+            padding: 15px 30px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.0625), 0 8px 12px rgba(0, 0, 0, 0.125);
+            height: 80px;
+            display: inline-block;
+        }
+
+        #profile {
+            height: 65px;
+            border-radius: 100px;
+        }
+
+        p {
+            color: white;
+            font-family: 'Phantom Sans 0.7';
+            margin: 0;
+        }
+
+        p#name {
+            font-size: 2.2rem;
+            margin-top: 6px;
+            font-weight: bold;
+        }
+
+        p#info {
+            margin-top: 3px;
+            font-size: 1.4rem;
+        }
+>>>>>>> parent of 1bf202f... Figma color update <3
     </style>
 </head>
 
 <body>
 
     <div id="overlay">
-        <p id="decor">300 x 80</p>
         <!-- Put Design Here -->
         <!-- <div id="left">
             <img src="https://via.placeholder.com/192" id="profile">
         </div> -->
 
-        <div class="lefttop vertex"></div>
-        <div class="leftbottom vertex"></div>
-        <div class="righttop vertex"></div>
-        <div class="rightbottom vertex"></div>
-
         <p id="name"></p>
         <p id="info"><span id="handle"></span> · <span id="role">Hack Club Staff</span></p>
-        
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"
