@@ -11,7 +11,7 @@
     "express": "^4.17.1",
     "express-basic-auth": "^1.2.0",
     "node-fetch": "^2.6.1",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.4.0"
   },
   "scripts": {
     "start": "node app.js"
